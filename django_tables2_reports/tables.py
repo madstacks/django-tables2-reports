@@ -78,14 +78,14 @@ class UnicodeWriter:
 class TableReport(tables.Table):
 
     def __init__(self, *args, **kwargs):
-        if not 'template' in kwargs:
-            kwargs['template'] = 'django_tables2_reports/table.html'
+        # if not 'template' in kwargs:
+        #     kwargs['template'] = 'django_tables2_reports/table.html'
         prefix_param_report = kwargs.pop('prefix_param_report', DEFAULT_PARAM_PREFIX)
         super(TableReport, self).__init__(*args, **kwargs)
         self.param_report = generate_prefixto_report(self, prefix_param_report)
-        self.formats = [(_('CSV Report'), 'csv')]
+        self.formats = [(_('CSV'), 'csv')]
         if get_excel_support():
-            self.formats.append((_('XLS Report'), 'xls'))
+            self.formats.append((_('Excel'), 'xls'))
 
     def as_report(self, request, format='csv'):
         if format == 'csv':
