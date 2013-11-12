@@ -32,7 +32,7 @@ def generate_prefixto_report(table, prefix_param_report=None):
     else:
         table_class = table
         prefix = None
-    param_report = "%s-%s" % (param_report, table_class.__name__.lower())
+    param_report = "%s-%ss" % (param_report, table_class.Meta.model._meta.verbose_name.lower())
     if prefix:
         param_report = "%s-%s" % (prefix, param_report)
     return param_report

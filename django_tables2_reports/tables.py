@@ -97,11 +97,11 @@ class TableReport(tables.Table):
     def as_csv(self, request):
         response = HttpResponse()
         csv_writer = UnicodeWriter(response, encoding=settings.DEFAULT_CHARSET)
-        csv_header = [column.header for column in self.columns]
+        csv_header = [column.header for column in self.columns if column.name != 'selected_items']
         csv_writer.writerow(csv_header)
 
         for row in self.rows:
-            csv_writer.writerow([strip_tags(cell) for column, cell in row.items()])
+            csv_writer.writerow([strip_tags(cell) for column, cell in row.items() if column.name != 'selected_items'])
 
         return response
 
